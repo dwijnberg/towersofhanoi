@@ -5,7 +5,7 @@ public class TowersOfHanoi extends WindowController {
 
 	public void begin() {
 		
-		Pole p1 = new Pole(120, 270, 10, 540, canvas);
+		Pole p1 = new Pole(120, 150, 10, 400, canvas);
 		
 	}
 	
