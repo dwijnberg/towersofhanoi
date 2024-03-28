@@ -6,6 +6,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="/Users/dwijnberg24/Documents/GitHub/datastructures/objectdrawV1.1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Daniel Jaime/Documents/GitHub/datastructures/objectdrawV1.1.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
