@@ -40,7 +40,7 @@ public class Pole {
 		
 		for (int i = 7; i > 0; i--) {
 			
-			Disk d = new Disk(pole.getX()+pole.getWidth()/2, pole.getY()+pole.getHeight()-(7-i)*25, i, this, canvas);
+			Disk d = new Disk(pole.getX()-(40+i*20-pole.getWidth())/2, pole.getY()+pole.getHeight()-(8-i)*25, i, this, canvas);
 			
 		}
 		
