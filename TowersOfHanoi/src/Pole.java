@@ -7,12 +7,14 @@ public class Pole {
 	
 	FilledRect pole;
 	Stack<Disk> disks;
+	DrawingCanvas canvas;
 	
 	public Pole(double x, double y, double wif, double lenf, DrawingCanvas canvas) {
 		
 		pole = new FilledRect(x,y,wif,lenf,canvas);
 		pole.setColor(Color.black);
 		disks = new Stack<Disk>();
+		this.canvas = canvas;
 		
 	}
 	
@@ -31,6 +33,16 @@ public class Pole {
 	public boolean removeDisk(Disk d) {
 		
 		return disks.remove(d);
+		
+	}
+	
+	public void createDisks() {
+		
+		for (int i = 7; i > 0; i--) {
+			
+			Disk d = new Disk(pole.getX()+pole.getWidth()/2, pole.getY()+pole.getHeight()-(7-i)*25, i, this, canvas);
+			
+		}
 		
 	}
 
