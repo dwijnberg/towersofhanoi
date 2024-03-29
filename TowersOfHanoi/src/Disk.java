@@ -7,7 +7,9 @@ public class Disk extends ActiveObject {
 	private int size;
 	private DrawingCanvas canvas;
 	
-	public Disk(int x, int y, int s, DrawingCanvas c) {
+	public Disk(double x, double y, double s, DrawingCanvas c) {
+		
+		disk = new FilledRect(x,y,s,HEIGHT,c);
 		
 	}
 	
