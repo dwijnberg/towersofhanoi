@@ -8,6 +8,8 @@ public class Disk extends ActiveObject {
 	private Pole rod;
 	private DrawingCanvas canvas;
 	private boolean running;
+	private int xMovement = 30;
+	private int yMovement = 30;
 	
 	public Disk(double x, double y, int s, Pole r, DrawingCanvas c) {
 		size = s;
@@ -35,7 +37,7 @@ public class Disk extends ActiveObject {
 			disk.setColor(Color.ORANGE);
 			break;
 		case 7:
-			disk.setColor(Color.GRAY);
+			disk.setColor(Color.BLUE);
 			break;
 		}
 		disk.sendToFront();
@@ -70,7 +72,14 @@ public class Disk extends ActiveObject {
 		pause(500);
 		System.out.println(canvas.getWidth() + " " + canvas.getHeight());
 		while (running) {
-			
+			if(disk.getX()<= 0 || disk.getX() >= canvas.getWidth()) {
+				xMovement = -xMovement;
+			}
+			if(disk.getY()<= 0 || disk.getY()>= canvas.getHeight()) {
+				yMovement = -yMovement;
+			}
+			disk.move(xMovement, yMovement);
+			pause(250);
 			
 			
 		}
