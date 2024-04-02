@@ -32,18 +32,35 @@ public class Pole {
 	
 	public boolean removeDisk(Disk d) {
 		
+		
 		return disks.remove(d);
 		
 	}
 	
-	public void createDisks() {
+	
+	
+	public int createDisks(int max) {
 		
-		for (int i = 7; i > 0; i--) {
+		for (int i = max; i > 0; i--) {
 			
 			Disk d = new Disk(pole.getX()-(40+i*20-pole.getWidth())/2, pole.getY()+pole.getHeight()-(8-i)*25, i, this, canvas);
+			disks.add(d);
+			
+		}
+		return max;
+		
+	}
+	
+	public void reset() {
+		
+		for (Disk d : disks) {
+			
+			d.getDisk().removeFromCanvas();
+			removeDisk(d);
 			
 		}
 		
 	}
+	
 
 }
