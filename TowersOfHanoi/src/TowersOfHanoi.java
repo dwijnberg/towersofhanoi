@@ -45,7 +45,7 @@ public class TowersOfHanoi extends WindowController implements KeyListener {
 		p2 = new Pole(360, 250, 10, 350, canvas);
 		p3 = new Pole(600, 250, 10, 350, canvas);
 		numOfMoves = 0;
-		moveLabel = new Text("Number of moves: " + numOfMoves, 550, 100, canvas);
+		moveLabel = new Text("Number of moves: " + numOfMoves, 550, 150, canvas);
 		moveLabel.setFontSize(15);
 		requestFocus();
 		addKeyListener(this);

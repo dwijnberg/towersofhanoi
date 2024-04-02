@@ -43,7 +43,7 @@ public class Pole {
 		
 		for (int i = max; i > 0; i--) {
 			
-			Disk d = new Disk(pole.getX()-(40+i*20-pole.getWidth())/2, pole.getY()+pole.getHeight()-(8-i)*25, i, this, canvas);
+			Disk d = new Disk(pole.getX()-(40+i*20-pole.getWidth())/2, pole.getY()+pole.getHeight()-(max+1-i)*25, i, this, canvas);
 			disks.add(d);
 			
 		}
@@ -53,10 +53,11 @@ public class Pole {
 	
 	public void reset() {
 		
-		for (Disk d : disks) {
+		while(!disks.empty()) {
 			
-			d.getDisk().removeFromCanvas();
-			removeDisk(d);
+			
+			getDisk().getDisk().removeFromCanvas();
+			removeDisk(getDisk());
 			
 		}
 		
