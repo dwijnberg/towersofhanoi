@@ -1,4 +1,6 @@
 import objectdraw.*;
+
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -45,8 +47,10 @@ public class TowersOfHanoi extends WindowController implements KeyListener {
 		p2 = new Pole(360, 250, 10, 350, canvas);
 		p3 = new Pole(600, 250, 10, 350, canvas);
 		numOfMoves = 0;
+
 		moveLabel = new Text("Number of moves: " + numOfMoves, 550, 150, canvas);
 		moveLabel.setFontSize(15);
+		moveLabel.setColor(Color.RED);
 		requestFocus();
 		addKeyListener(this);
 		canvas.addKeyListener(this);
