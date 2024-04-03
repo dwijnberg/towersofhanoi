@@ -22,6 +22,8 @@ public class TowersOfHanoi extends WindowController implements KeyListener {
 	private Pole p1;
 	private Pole p2;
 	private Pole p3;
+	private Disk selected;
+	private Location here;
 
 	
 	public void begin() {
@@ -84,7 +86,7 @@ public class TowersOfHanoi extends WindowController implements KeyListener {
 		
 	}
 	
-	public void onMousePress(Location point) {
+	public void onMouseClick(Location point) {
 		
 		String button = inButton(point);
 		if (button == null) {
@@ -103,6 +105,21 @@ public class TowersOfHanoi extends WindowController implements KeyListener {
 			break;
 		
 		
+		}
+		
+	}
+	
+	public void onMousePress(Location point) {
+		here = point;
+		if(p1)
+	}
+	
+	public void onMouseDrag(Location point) {
+		if(selected != null) {
+			double dx = point.getX() - here.getX();
+			double dy = point.getY() - here.getY();
+			selected.move(dx, dy);
+			here = point;
 		}
 		
 	}
