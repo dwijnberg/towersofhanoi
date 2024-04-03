@@ -79,7 +79,59 @@ public class TowersOfHanoi extends WindowController implements KeyListener {
 		}
 		
 	}
+	
+	public void onMousePress(Location point) {
+		
+		String button = inButton(point);
+		if (button == null) {
+			return;
+		}
+		switch (button) {
+		
+		case "save":
+			save();
+			break;
+		case "reset":
+			p1.reset();
+			p2.reset();
+			p3.reset();
+			p1.createDisks();
+			break;
+		
+		
+		}
+		
+	}
+	
+	public void save() {
+		
+		
+	}
 
+	public String inButton(Location point) {
+		
+		if (saveButton.contains(point)) {
+			
+			return "save";
+			
+		} else if (undoButton.contains(point)) {
+			
+			return "undo";
+			
+		} else if (resetButton.contains(point)) {
+			
+			return "reset";
+			
+		} else if (autoplayButton.contains(point)) {
+			
+			return "autoplay";
+			
+		}
+		
+		return null;
+		
+	}
+	
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
