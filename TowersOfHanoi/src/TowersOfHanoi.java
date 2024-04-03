@@ -88,7 +88,6 @@ public class TowersOfHanoi extends WindowController implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		JOptionPane.showMessageDialog(null, e.getKeyChar());
 		switch (e.getKeyChar()) {
 	
 		case '3':
