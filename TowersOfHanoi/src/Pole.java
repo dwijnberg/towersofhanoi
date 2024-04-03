@@ -27,6 +27,12 @@ public class Pole {
 		
 	}
 	
+	public FilledRect getPole() {
+		
+		return pole;
+		
+	}
+	
 	public Disk getDisk() {
 		
 		return disks.lastElement();
@@ -40,7 +46,24 @@ public class Pole {
 		
 	}
 	
+	public int numDisks() {
+		
+		return disks.size();
+		
+	}
 	
+	public void moveDisk(Disk d, Pole newPole) {
+		
+		if (disks.lastElement().equals(d) && !newPole.equals(this)) {
+			
+			FilledRect disk = d.getDisk();
+			disk.moveTo(newPole.getPole().getX()-(40+d.getSize()*20-newPole.getPole().getWidth())/2, pole.getY()+pole.getHeight()-25);
+			disks.remove(d);
+			newPole.addDisk(d);
+			
+		}
+		
+	}
 	
 	public int createDisks(int max) {
 		
