@@ -3,6 +3,7 @@ import objectdraw.*;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Stack;
 
 import javax.swing.JOptionPane;
 
@@ -24,6 +25,7 @@ public class TowersOfHanoi extends WindowController implements KeyListener {
 	private Pole p3;
 	private Disk selected;
 	private Location here;
+	private Stack<Move> moves;
 
 	
 	public void begin() {
@@ -56,6 +58,8 @@ public class TowersOfHanoi extends WindowController implements KeyListener {
 		requestFocus();
 		addKeyListener(this);
 		canvas.addKeyListener(this);
+		
+		moves = new Stack<Move>();
 
 
 		
@@ -103,7 +107,12 @@ public class TowersOfHanoi extends WindowController implements KeyListener {
 			p3.reset();
 			p1.createDisks();
 			break;
-		
+		case "undo":
+			if (moves.size() > 0) {
+				undo();
+				break;
+			}
+			
 		
 		}
 		
@@ -121,6 +130,13 @@ public class TowersOfHanoi extends WindowController implements KeyListener {
 			selected.move(dx, dy);
 			here = point;
 		}
+		}
+		
+	public void undo() {
+		
+		Move lastMove = moves.lastElement();
+		lastMove.getDisk().getPole().moveDisk(lastMove.getDisk(), lastMove.getPole());
+
 		
 	}
 	
