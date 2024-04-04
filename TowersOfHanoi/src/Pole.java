@@ -102,5 +102,14 @@ public class Pole {
 		
 	}
 	
+	
+	public boolean diskContains(Location point) {
+		if(disks.size() == 0) {
+			return false;
+		} else {
+			return disks.lastElement().getDisk().contains(point);
+		}
+	}
+	
 
 }

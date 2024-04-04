@@ -120,7 +120,15 @@ public class TowersOfHanoi extends WindowController implements KeyListener {
 	
 	public void onMousePress(Location point) {
 		here = point;
-		if(p1)
+		if(p1.diskContains(point)) {
+			selected = p1.getDisk();
+		}
+		if(p2.diskContains(point)) {
+			selected = p2.getDisk();
+		}
+		if (p3.diskContains(point)) {
+			selected = p3.getDisk();
+		}
 	}
 	
 	public void onMouseDrag(Location point) {
