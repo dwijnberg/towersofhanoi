@@ -3,6 +3,11 @@ import objectdraw.*;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.Clock;
+import java.util.Iterator;
 import java.util.Stack;
 
 import javax.swing.JOptionPane;
@@ -46,10 +51,10 @@ public class TowersOfHanoi extends WindowController implements KeyListener {
 		resetText = new Text("reset",640,100,canvas);
 		resetText.setFontSize(12);
 		
-		p1 = new Pole(120, 250, 10, 350, canvas);
+		p1 = new Pole(120, 250, 10, 350, 1, canvas);
 		numOfDisks = p1.createDisks(7);
-		p2 = new Pole(360, 250, 10, 350, canvas);
-		p3 = new Pole(600, 250, 10, 350, canvas);
+		p2 = new Pole(360., 250., 10., 350., 2, canvas);
+		p3 = new Pole(600, 250, 10, 350, 3, canvas);
 		numOfMoves = 0;
 
 		moveLabel = new Text("Number of moves: " + numOfMoves, 550, 150, canvas);
@@ -142,7 +147,7 @@ public class TowersOfHanoi extends WindowController implements KeyListener {
 		
 	public void undo() {
 		
-		Move lastMove = moves.lastElement();
+		Move lastMove = moves.peek();
 		lastMove.getDisk().getPole().moveDisk(lastMove.getDisk(), lastMove.getPole());
 
 		
@@ -150,6 +155,29 @@ public class TowersOfHanoi extends WindowController implements KeyListener {
 	
 	public void save() {
 		
+		File saveFile = new File("towersofhanoi" + Clock.systemUTC());
+		try {
+			if (saveFile.createNewFile()) {
+				
+				FileWriter saveWriter = new FileWriter(saveFile);
+				Stack<Move> movesReverse = new Stack<Move>();
+				while(moves.size() > 0) {
+					
+					movesReverse.push(moves.pop());
+					
+				}
+				while(movesReverse.size() > 0) {
+					
+					saveWriter.append(movesReverse.peek().getDisk().getSize() + "-" + movesReverse.peek().getPole().toString() + "\n");
+					moves.push(movesReverse.pop());
+					
+				}
+				
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 

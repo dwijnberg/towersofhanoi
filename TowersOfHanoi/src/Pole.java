@@ -9,14 +9,16 @@ public class Pole {
 	private Stack<Disk> disks;
 	private DrawingCanvas canvas;
 	private int numDisks;
+	private Integer poleNum;
 	
 	
-	public Pole(double x, double y, double wif, double lenf, DrawingCanvas canvas) {
+	public Pole(double x, double y, double wif, double lenf, Integer poleNum, DrawingCanvas canvas) {
 		
 		pole = new FilledRect(x,y,wif,lenf,canvas);
 		pole.setColor(Color.black);
 		disks = new Stack<Disk>();
 		numDisks = 7;
+		this.poleNum = poleNum;
 		this.canvas = canvas;
 		
 	}
@@ -35,7 +37,7 @@ public class Pole {
 	
 	public Disk getDisk() {
 		
-		return disks.lastElement();
+		return disks.peek();
 		
 	}
 	
@@ -54,7 +56,7 @@ public class Pole {
 	
 	public void moveDisk(Disk d, Pole newPole) {
 		
-		if (disks.lastElement().equals(d) && !newPole.equals(this)) {
+		if (disks.peek().equals(d) && !newPole.equals(this)) {
 			
 			FilledRect disk = d.getDisk();
 			disk.moveTo(newPole.getPole().getX()-(40+d.getSize()*20-newPole.getPole().getWidth())/2, pole.getY()+pole.getHeight()-25);
@@ -109,6 +111,14 @@ public class Pole {
 		} else {
 			return disks.lastElement().getDisk().contains(point);
 		}
+		
+	}
+	
+	public String toString() {
+		
+		return poleNum.toString();
+		
+		
 	}
 	
 
