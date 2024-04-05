@@ -154,8 +154,8 @@ public class TowersOfHanoi extends WindowController implements KeyListener {
 	}
 	
 	public void save() {
-		
-		File saveFile = new File("towersofhanoi" + Clock.systemUTC());
+		System.out.print("save");
+		File saveFile = new File("towersofhanoi" + System.currentTimeMillis()+".txt");
 		try {
 			if (saveFile.createNewFile()) {
 				
@@ -172,6 +172,51 @@ public class TowersOfHanoi extends WindowController implements KeyListener {
 					moves.push(movesReverse.pop());
 					
 				}
+				saveWriter.append("\n");
+				Stack<Disk> pole1 = new Stack<Disk>();
+				String savePole1 = "";
+				while (p1.getDisks().size() > 0) {
+					
+					Disk d = p1.getDisks().pop();
+					pole1.push(d);
+					savePole1 = d.getSize() + "\n" + savePole1;
+					
+				}
+				while (pole1.size() > 0) {
+					
+					p1.getDisks().push(pole1.pop());
+					
+				}
+				System.out.print(pole1.size());
+				Stack<Disk> pole2 = new Stack<Disk>();
+				String savePole2 = "Pole 2:\n";
+				while (p2.getDisks().size() > 0) {
+					
+					pole2.push(p2.getDisks().pop());
+					savePole2 = pole2.pop().getSize() + savePole2;
+					
+				}
+				while (pole2.size() > 0) {
+					
+					p2.getDisks().push(pole2.pop());
+					
+				}
+				System.out.print(pole2.size());
+				Stack<Disk> pole3 = new Stack<Disk>();
+				String savePole3 = "Pole 3:\n";
+				while (p3.getDisks().size() > 0) {
+					
+					pole3.push(p3.getDisks().pop());
+					savePole3 = pole3.pop().getSize() + savePole3;
+					
+				}
+				while (pole3.size() > 0) {
+					
+					p3.getDisks().push(pole3.pop());
+					
+				}
+				System.out.print(pole3.size());
+				saveWriter.close();
 				
 			}
 		} catch (IOException e) {

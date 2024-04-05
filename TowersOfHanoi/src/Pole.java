@@ -114,6 +114,12 @@ public class Pole {
 		
 	}
 	
+	public Stack<Disk> getDisks() {
+		
+		return disks;
+		
+	}
+	
 	public String toString() {
 		
 		return poleNum.toString();
