@@ -57,7 +57,7 @@ public class TowersOfHanoi extends WindowController implements KeyListener {
 		
 		
 		p1 = new Pole(120, 250, 10, 350, 1, canvas);
-		p2 = new Pole(360., 250., 10., 350., 2, canvas);
+		p2 = new Pole(360, 250, 10, 350, 2, canvas);
 		p3 = new Pole(600, 250, 10, 350, 3, canvas);
 		
 		if (saveFile == null) {
