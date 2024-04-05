@@ -10,12 +10,15 @@ public class Pole {
 	private DrawingCanvas canvas;
 	private int numDisks;
 	private Integer poleNum;
+	private FramedRect poleHitbox;
 	
 	
 	public Pole(double x, double y, double wif, double lenf, Integer poleNum, DrawingCanvas canvas) {
 		
 		pole = new FilledRect(x,y,wif,lenf,canvas);
 		pole.setColor(Color.black);
+		poleHitbox = new FramedRect(x-85,y,180,lenf,canvas);
+		poleHitbox.hide();
 		disks = new Stack<Disk>();
 		numDisks = 7;
 		this.poleNum = poleNum;
@@ -114,6 +117,10 @@ public class Pole {
 		
 	}
 	
+	public boolean contains(Location point) {
+		return(poleHitbox.contains(point));
+	}
+	
 	public Stack<Disk> getDisks() {
 		
 		return disks;
@@ -125,6 +132,14 @@ public class Pole {
 		return poleNum.toString();
 		
 		
+	}
+	
+	public boolean addable(Disk d) {
+		if(disks.size()==0) {
+			return true;
+		} else {
+			return(d.getSize()<=disks.peek().getSize());
+		}
 	}
 	
 
