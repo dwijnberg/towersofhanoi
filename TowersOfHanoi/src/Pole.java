@@ -83,6 +83,14 @@ public class Pole {
 		
 	}
 	
+	public void createDisk(int size) {
+					
+			Disk d = new Disk(pole.getX()-(40+size*20-pole.getWidth())/2, pole.getY()+pole.getHeight()-(disks.size()+1)*25, size, this, canvas);
+			disks.add(d);
+		
+		
+	}
+	
 	public int createDisks() {
 		
 		for (int i = numDisks; i > 0; i--) {
