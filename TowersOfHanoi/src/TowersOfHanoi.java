@@ -95,13 +95,8 @@ public void read() {
 				
 			String next = "";
 			Stack<Integer> disks = new Stack<Integer>();
-			Pole p = null;
-			while ((next = reader.nextLine()) != "Pole") {
-				if (next.contains("Pole")) {
-					
-					p = getPole(Integer.parseInt(next.substring(5, 6)));
-					
-				}
+			Pole p = p1;
+			while (!(next = reader.nextLine()).contains("Pole")) {
 				disks.push(Integer.parseInt(next));
 
 					
@@ -111,13 +106,9 @@ public void read() {
 				p.createDisk(Integer.parseInt(next));
 				
 			}
-			p = null;
-			while ((next = reader.nextLine()) != "Pole") {
-				if (next.contains("Pole")) {
-					
-					p = getPole(Integer.parseInt(next.substring(5, 6)));
-					
-				}
+			p = p2;
+			while (!(next = reader.nextLine()).contains("Pole")) {
+				
 				disks.push(Integer.parseInt(next));
 
 					
@@ -127,13 +118,8 @@ public void read() {
 				p.createDisk(Integer.parseInt(next));
 				
 			}
-			p = null;
-			while ((next = reader.nextLine()) != "Pole") {
-				if (next.contains("Pole")) {
-					
-					p = getPole(Integer.parseInt(next.substring(5, 6)));
-					
-				}
+			p = p3;
+			while (!(next = reader.nextLine()).contains("Pole")) {
 				disks.push(Integer.parseInt(next));
 
 					
@@ -187,20 +173,27 @@ public void read() {
 	public Disk getDisk(int size) {
 		
 		Stack<Disk> pole = new Stack<Disk>();
+		Disk disk = null;
 		while (p1.getDisks().size() > 0) {
 			
 			Disk d = p1.getDisks().pop();
 			if (d.getSize() == size) {
 				
-				return d;
+				disk = d;
 				
 			}
 			pole.push(d);
 			
 		}
+		
 		while (pole.size() > 0) {
 			
 			p1.getDisks().push(pole.pop());
+			
+		}
+		if (disk != null) {
+			
+			return disk;
 			
 		}
 		pole = new Stack<Disk>();
@@ -209,7 +202,7 @@ public void read() {
 			Disk d = p2.getDisks().pop();
 			if (d.getSize() == size) {
 				
-				return d;
+				disk = d;
 				
 			}
 			pole.push(d);
@@ -220,13 +213,18 @@ public void read() {
 			p2.getDisks().push(pole.pop());
 			
 		}
+		if (disk != null) {
+			
+			return disk;
+			
+		}
 		pole = new Stack<Disk>();
 		while (p3.getDisks().size() > 0) {
 			
 			Disk d = p3.getDisks().pop();
 			if (d.getSize() == size) {
 				
-				return d;
+				disk = d;
 				
 			}
 			pole.push(d);
@@ -237,7 +235,7 @@ public void read() {
 			p3.getDisks().push(pole.pop());
 			
 		}
-		return null;
+		return disk;
 		
 	}
 	
@@ -247,6 +245,7 @@ public void read() {
 		moveLabel.setText("Number of moves: " + numOfMoves);
 		
 	}
+	
 	
 	public void movesReset() {
 		
@@ -292,12 +291,16 @@ public void read() {
 			p2.reset();
 			p3.reset();
 			p1.createDisks();
+			numOfMoves = 0;
+			moveLabel.setText("Number of moves: " + numOfMoves);
 			if(victory != null) {
 				victory.hide();
 			}
 			numOfMoves = 0;
 			break;
 		case "undo":
+			System.out.print(moves.size());
+
 			if (moves.size() > 0) {
 				undo();
 				break;
@@ -342,15 +345,38 @@ public void read() {
 
 			
 			if(p1.contains(point) && p1.addable(selected)) {
+				if (selected.getPole() != p1) {
+					
+					moves.add(new Move(selected, selected.getPole()));
+					newMove();
+					
+				}
 				selected.getPole().moveDisk(selected,p1);
-			} else if(p2.contains(point) && p2.addable(selected)) {
+				
+			} else if (p2.contains(point) && p2.addable(selected)) {
+				if (selected.getPole() != p2) {
+					
+					moves.add(new Move(selected, selected.getPole()));
+					newMove();
+					
+				}
 				selected.getPole().moveDisk(selected,p2);
-			} else if(p3.contains(point) && p3.addable(selected)) {
+				
+			} else if (p3.contains(point) && p3.addable(selected)) {
+				if (selected.getPole() != p3) {
+					
+					moves.add(new Move(selected, selected.getPole()));
+					newMove();
+					
+				}
 				selected.getPole().moveDisk(selected,p3);
+				
 			}
 			else {
 				selected.getPole().moveDisk(selected, selected.getPole());
 			}
+			
+			
 		}
 		selected = null;
 		if(winCondition()) {
@@ -360,8 +386,11 @@ public void read() {
 		
 	public void undo() {
 		
-		Move lastMove = moves.peek();
+		Move lastMove = moves.pop();
 		lastMove.getDisk().getPole().moveDisk(lastMove.getDisk(), lastMove.getPole());
+		numOfMoves--;
+		moveLabel.setText("Number of moves: " + numOfMoves);
+		
 
 		
 	}
@@ -404,7 +433,7 @@ public void read() {
 					p2.getDisks().push(pole2.pop());
 					
 				}
-				savePole2 = "Pole 2: " + savePole2;
+				savePole2 = "Pole 2:\n" + savePole2;
 				saveWriter.append(savePole2);
 				Stack<Disk> pole3 = new Stack<Disk>();
 				String savePole3 = "";
@@ -420,7 +449,7 @@ public void read() {
 					p3.getDisks().push(pole3.pop());
 					
 				}
-				savePole3 = "Pole 3: " + savePole3;
+				savePole3 = "Pole 3:\n" + savePole3;
 				saveWriter.append(savePole3);
 				saveWriter.append("\n");
 				while(moves.size() > 0) {

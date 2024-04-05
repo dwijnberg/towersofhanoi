@@ -60,15 +60,12 @@ public class Pole {
 	
 	public void moveDisk(Disk d, Pole newPole) {
 		
-		System.out.println(disks.peek().equals(d) + " " + disks.peek().getSize() + " " + poleNum);
 		if (disks.size() > 0 && disks.peek().equals(d) && !newPole.equals(this)) {
 			
 			FilledRect disk = d.getDisk();
 			disk.moveTo(newPole.getPole().getX()-(40+d.getSize()*20-newPole.getPole().getWidth())/2, pole.getY()+pole.getHeight()-25*(newPole.getDisks().size()+1));
-			System.out.print(disks.size());
 			disks.remove(d);
 			d.setPole(newPole);
-			System.out.println("Same pole: " + disks.size());
 			
 			newPole.addDisk(d);
 			
@@ -131,7 +128,6 @@ public class Pole {
 			return false;
 		} else {
 			
-			System.out.println("Disk Contains:" + disks.peek().getDisk().contains(point));
 			return disks.peek().getDisk().contains(point);
 		}
 		
