@@ -31,6 +31,7 @@ public class TowersOfHanoi extends WindowController implements KeyListener {
 	private Disk selected;
 	private Location here;
 	private Stack<Move> moves;
+	private Text victory;
 
 	
 	public void begin() {
@@ -55,11 +56,12 @@ public class TowersOfHanoi extends WindowController implements KeyListener {
 		numOfDisks = p1.createDisks(7);
 		p2 = new Pole(360., 250., 10., 350., 2, canvas);
 		p3 = new Pole(600, 250, 10, 350, 3, canvas);
+		
 		numOfMoves = 0;
-
 		moveLabel = new Text("Number of moves: " + numOfMoves, 550, 150, canvas);
 		moveLabel.setFontSize(15);
 		moveLabel.setColor(Color.RED);
+		
 		requestFocus();
 		addKeyListener(this);
 		canvas.addKeyListener(this);
@@ -143,7 +145,13 @@ public class TowersOfHanoi extends WindowController implements KeyListener {
 			selected.move(dx, dy);
 			here = point;
 		}
+	}
+	
+	public void onMouseRelease(Location point) {
+		if(selected != null) {
+			
 		}
+	}
 		
 	public void undo() {
 		
@@ -254,6 +262,21 @@ public class TowersOfHanoi extends WindowController implements KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
+		
+	}
+	
+	private boolean winCondition() {
+		if(p3.numDisks() == numOfDisks) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	private void victoryScreen() {
+		victory = new Text("You won!",400,100, canvas);
+		victory.setFontSize(20);
+		
 		
 	}
 	
