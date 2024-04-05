@@ -81,7 +81,6 @@ public class TowersOfHanoi extends WindowController implements KeyListener {
 		numOfMoves = moves.size();
 
 
-
 		
 	}
 	
