@@ -319,6 +319,9 @@ public void read() {
 		} else if (p3.diskContains(point)) {
 			selected = p3.getDisk();
 		}
+		else {
+			selected = null;
+		}
 	}
 	
 	public void onMouseDrag(Location point) {
