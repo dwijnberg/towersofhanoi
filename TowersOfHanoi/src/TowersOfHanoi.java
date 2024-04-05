@@ -314,11 +314,9 @@ public void read() {
 		here = point;
 		if(p1.diskContains(point)) {
 			selected = p1.getDisk();
-		}
-		if(p2.diskContains(point)) {
+		} else if(p2.diskContains(point)) {
 			selected = p2.getDisk();
-		}
-		if (p3.diskContains(point)) {
+		} else if (p3.diskContains(point)) {
 			selected = p3.getDisk();
 		}
 	}
@@ -334,15 +332,22 @@ public void read() {
 	
 	public void onMouseRelease(Location point) {
 		if(selected != null) {
+			//System.out.println("Release:" + selected.getSize());
+			double p1distance = point.distanceTo(new Location(p1.getPole().getX() + p1.getPole().getWidth()/2, p1.getPole().getY()));
+			double p2distance = point.distanceTo(new Location(p2.getPole().getX() + p2.getPole().getWidth()/2, p2.getPole().getY()));
+			double p3distance = point.distanceTo(new Location(p3.getPole().getX() + p3.getPole().getWidth()/2, p3.getPole().getY()));
+
+
+			
 			if(p1.contains(point) && p1.addable(selected)) {
-				p1.moveDisk(selected,p3);
+				selected.getPole().moveDisk(selected,p1);
 			} else if(p2.contains(point) && p2.addable(selected)) {
-				p2.moveDisk(selected,p3);
+				selected.getPole().moveDisk(selected,p2);
 			} else if(p3.contains(point) && p3.addable(selected)) {
-				p3.moveDisk(selected,p3);
+				selected.getPole().moveDisk(selected,p3);
 			}
 			else {
-				selected.getPole().addDisk(selected);
+				selected.getPole().moveDisk(selected, selected.getPole());
 			}
 		}
 		selected = null;

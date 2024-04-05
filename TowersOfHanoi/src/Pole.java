@@ -59,12 +59,20 @@ public class Pole {
 	
 	public void moveDisk(Disk d, Pole newPole) {
 		
+		System.out.println(disks.size() > 0 && disks.peek().equals(d) && !newPole.equals(this));
 		if (disks.size() > 0 && disks.peek().equals(d) && !newPole.equals(this)) {
 			
 			FilledRect disk = d.getDisk();
-			disk.moveTo(newPole.getPole().getX()-(40+d.getSize()*20-newPole.getPole().getWidth())/2, pole.getY()+pole.getHeight()-25);
+			disk.moveTo(newPole.getPole().getX()-(40+d.getSize()*20-newPole.getPole().getWidth())/2, pole.getY()+pole.getHeight()-25*(newPole.getDisks().size()+1));
+			
 			disks.remove(d);
+			System.out.println("Same pole: " + newPole.getDisks().size());
 			newPole.addDisk(d);
+			
+		} else if (newPole.getPole().getLocation().equals(pole.getLocation())) {
+			
+			FilledRect disk = d.getDisk();
+			disk.moveTo(newPole.getPole().getX()-(40+d.getSize()*20-newPole.getPole().getWidth())/2, pole.getY()+pole.getHeight()-25*(disks.size()+1));
 			
 		}
 		
@@ -107,7 +115,6 @@ public class Pole {
 		
 		while(!disks.empty()) {
 			
-			
 			getDisk().getDisk().removeFromCanvas();
 			removeDisk(getDisk());
 			
@@ -120,7 +127,9 @@ public class Pole {
 		if(disks.size() == 0) {
 			return false;
 		} else {
-			return disks.lastElement().getDisk().contains(point);
+			
+			System.out.println("Disk Contains:" + disks.peek().getDisk().contains(point));
+			return disks.peek().getDisk().contains(point);
 		}
 		
 	}
