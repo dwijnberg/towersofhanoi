@@ -86,17 +86,6 @@ public class TowersOfHanoi extends WindowController implements KeyListener {
 		
 	}
 	
-	public static void main(String[] args) {
-		
-		new TowersOfHanoi().startController(720, 1080);
-		JOptionPane.showMessageDialog(null, "Towers of Hanoi, built by EA™");
-		while(true) {
-			//JOptionPane.showMessageDialog(null, "Please send 5 dollars to @Duncan-Wijnberg on Venmo");
-
-		}
-		
-	}
-	
 	public void onMouseClick(Location point) {
 		
 		String button = inButton(point);
@@ -113,6 +102,10 @@ public class TowersOfHanoi extends WindowController implements KeyListener {
 			p2.reset();
 			p3.reset();
 			p1.createDisks();
+			if(victory != null) {
+				victory.hide();
+			}
+			numOfMoves = 0;
 			break;
 		case "undo":
 			if (moves.size() > 0) {
@@ -150,11 +143,11 @@ public class TowersOfHanoi extends WindowController implements KeyListener {
 	public void onMouseRelease(Location point) {
 		if(selected != null) {
 			if(p1.contains(point) && p1.addable(selected)) {
-				p1.addDisk(selected);
+				p1.moveDisk(selected,p3);
 			} else if(p2.contains(point) && p2.addable(selected)) {
-				p2.addDisk(selected);
+				p2.moveDisk(selected,p3);
 			} else if(p3.contains(point) && p3.addable(selected)) {
-				p3.addDisk(selected);
+				p3.moveDisk(selected,p3);
 			}
 			else {
 				selected.getPole().addDisk(selected);
@@ -335,6 +328,17 @@ public class TowersOfHanoi extends WindowController implements KeyListener {
 		victory = new Text("You won!",400,100, canvas);
 		victory.setFontSize(20);
 		
+		
+	}
+	
+	public static void main(String[] args) {
+		
+		new TowersOfHanoi().startController(720, 1080);
+		JOptionPane.showMessageDialog(null, "Towers of Hanoi, built by EA™");
+		while(true) {
+			//JOptionPane.showMessageDialog(null, "Please send 5 dollars to @Duncan-Wijnberg on Venmo");
+
+		}
 		
 	}
 	
