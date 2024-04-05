@@ -60,7 +60,7 @@ public class TowersOfHanoi extends WindowController implements KeyListener {
 		p2 = new Pole(360., 250., 10., 350., 2, canvas);
 		p3 = new Pole(600, 250, 10, 350, 3, canvas);
 		
-		if (saveFile.length() == 0) {
+		if (saveFile == null) {
 			numOfDisks = p1.createDisks(7);
 			moves = new Stack<Move>();
 
