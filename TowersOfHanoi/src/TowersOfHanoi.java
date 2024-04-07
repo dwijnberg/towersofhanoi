@@ -14,6 +14,15 @@ import java.util.Stack;
 
 import javax.swing.JOptionPane;
 
+/*
+ * 
+ * 2. If we were to have made a CLI option, many of the classes already made could have been reused but modified slightly. The pole class for example could be reused for the most part except for changing the methods which deal explicitly with objectdraw objects and convert them to graphics shown in text on the command line. 
+ * The method most effected by this would be moveDisk, as it calls methods from objectdraw, but almost all the rest of the methods are reusable. The same goes for disk, where I would just need to change the constructor to produce a command line graphic and not a FilledRect. 
+ * In the main class, much less can be salvaged as new methods need to be made to convert all of the mouse actions to typed inputs and the same would go for the buttons as well. THe save/read methods would be largely unchanged and so would the getDisk/getPole methods.
+ * 3. The ABACABA pattern is a pattern that offers the best solution to the Towers of Hanoi game. If you were to convert the letters into the corresponding poles, you would find that if you take the pole from the top of the first pole (A) and place it on the pole 2 (B) and continue in the order of the pattern, you would solve the puzzle in the most efficient way.
+ * 
+ */
+
 public class TowersOfHanoi extends WindowController implements KeyListener {
 	
 	private FramedRect saveButton;
