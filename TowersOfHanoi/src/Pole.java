@@ -158,5 +158,9 @@ public class Pole {
 		}
 	}
 	
+	public Disk popTop() {
+		return disks.pop();
+	}
+	
 
 }
