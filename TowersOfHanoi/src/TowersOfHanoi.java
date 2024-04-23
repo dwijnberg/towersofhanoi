@@ -8,13 +8,16 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.Clock;
-import java.util.Iterator;
+import java.util.autoRun;
 import java.util.Scanner;
 import java.util.Stack;
 
 import javax.swing.JOptionPane;
 
 /*
+ * 1.IH: If there were x disks, it would require 2^x - 1 moves. Let M represent the number of moves, so M = 2^x - 1.
+ * Next, we have to demonstrate that for x+1 disks, there will be 2^(x+1) - 1 moves. 
+ * Assuming that for x disks, it takes M moves. With x+1 disks, the process involves relocating x disks from the top, which would require M moves. Then, an additional move is utilized to transfer the x+1th disk to the final pole. Finally, the x disks are moved again onto the final peg, needing M moves again. So for x+1 disks, it would take 2M + 1 moves. Substituting the value of M into the equation gives us 2 * (2^x - 1) + 1 = 2^(x+1) - 1.
  * 
  * 2. If we were to have made a CLI option, many of the classes already made could have been reused but modified slightly. The pole class for example could be reused for the most part except for changing the methods which deal explicitly with objectdraw objects and convert them to graphics shown in text on the command line. 
  * The method most effected by this would be moveDisk, as it calls methods from objectdraw, but almost all the rest of the methods are reusable. The same goes for disk, where I would just need to change the constructor to produce a command line graphic and not a FilledRect. 
@@ -45,6 +48,7 @@ public class TowersOfHanoi extends WindowController implements KeyListener {
 	private Text victory;
 	private static String saveFile;
 	private boolean autoplaying;
+	private Autoplayer autoRun;
 
 	
 	public void begin() {
@@ -294,12 +298,12 @@ public void read() {
 		switch (button) {
 		
 		case "auto":
-			if (!autoPlaying) {
-				autoPlaying = true;
-				iterator.startPlaying();
+			if (!autoplaying) {
+				autoplaying = true;
+				autoRun.startPlaying();
 			} else {
-				autoPlaying = false;
-				iterator.pause();
+				autoplaying = false;
+				autoRun.pause();
 			}
 		
 		case "save":

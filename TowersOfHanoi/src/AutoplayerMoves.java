@@ -8,9 +8,9 @@ public class AutoplayerMoves extends ActiveObject{
 	private boolean stop = false;
 	private int pace;
 	private boolean loading;
-	private Autoplayer iterator;
+	private Autoplayer autoRun;
 	
-	public AutoplayerMoves(History h, Queue<String[]> k, int p, boolean l, Autoplayer i) {
+	public AutoplayerMoves(History h, Queue<String[]> k, int p, boolean l, Autoplayer ar) {
 		memory = h;
 		key = k;
 		pace = p;
@@ -18,7 +18,7 @@ public class AutoplayerMoves extends ActiveObject{
 		if (loading) {
 			pause(500);
 		}
-		iterator = i;
+		autoRun = ar;
 		start();
 	}
 	
@@ -33,7 +33,7 @@ public class AutoplayerMoves extends ActiveObject{
 			}
 		}
 		if (!loading) {
-			iterator.setFlag();
+			autoRun.setFlag();
 		}
 	}
 	

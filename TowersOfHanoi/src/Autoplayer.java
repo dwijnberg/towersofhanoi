@@ -28,17 +28,25 @@ public class Autoplayer {
 		}
 	}
 	
-	//find middle pile given source and destination
 	private String returnMid(String source, String dest) {
-		if (source.equals("l")&&dest.equals("m")) return "r";
-		else if (source.equals("l")&&dest.equals("r")) return "m";
-		else if (source.equals("m")&&dest.equals("r")) return "l";
-		else if (source.equals("m")&&dest.equals("l")) return "r";
-		else if (source.equals("r")&&dest.equals("l")) return "m";
+		if (source.equals("l")&&dest.equals("m")) {
+			return "r";
+		}
+		else if (source.equals("l")&&dest.equals("r")) {
+			return "m";
+		}
+		else if (source.equals("m")&&dest.equals("r")) {
+			return "l";
+		}
+		else if (source.equals("m")&&dest.equals("l")) {
+			return "r";
+		}
+		else if (source.equals("r")&&dest.equals("l")) {
+			return "m";
+		}
 		else return "l";
 	}
 	
-	//recursive program that finds optimal solution
 	private void figureItOut(int num, String source, String dest) {
 		if (num == 1) {
 			move(source, dest);
@@ -57,7 +65,6 @@ public class Autoplayer {
 		key.add(temp);
 	}
 	
-	//convert String to Pile
 	private Pole toPile(String s) {
 		switch (s) {
 		case "l":
@@ -70,32 +77,14 @@ public class Autoplayer {
 		return null;
 	}
 	
-	//set flag for auto play
-	//for when a wrong move is made
 	public void setFlag() {
 		flag = memory.getHistory().size();
-	}
-	
-	//check if a move is optimal
-	public boolean checkOptimal(String[] move) {
-		if (best && key.size()>0) {
-			boolean result = (move[0].equals(key.peek()[0]) && move[1].equals(key.peek()[1]));
-			if (!result) {
-				best = result;
-			} else {
-				key.remove();
-			}
-			return result;
-		}
-		else return true;
 	}
 	
 	public void remove() {
 		key.remove();
 	}
 	
-	// initialize auto play by creating an active object
-	// auto play can be called after loading from file, whether the moves saved in file are optimal or not (Counts as an extension?)
 	public void startPlaying() {
 		if (!best) {
 			int temp = key.size();
@@ -118,8 +107,6 @@ public class Autoplayer {
 		graphics = new AutoplayerMoves(memory, key, 1000, false, this);
 	}
 	
-	// pause auto play 
-	// player can pause and un-pause and make moves in between without bugging the game out. (Counts as an extension?)
 	public void pause() {
 		if (graphics != null) {
 			graphics.pause();
