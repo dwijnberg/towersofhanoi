@@ -44,6 +44,7 @@ public class TowersOfHanoi extends WindowController implements KeyListener {
 	private Stack<Move> moves;
 	private Text victory;
 	private static String saveFile;
+	private boolean autoplaying;
 
 	
 	public void begin() {
@@ -291,6 +292,15 @@ public void read() {
 			return;
 		}
 		switch (button) {
+		
+		case "auto":
+			if (!autoPlaying) {
+				autoPlaying = true;
+				iterator.startPlaying();
+			} else {
+				autoPlaying = false;
+				iterator.pause();
+			}
 		
 		case "save":
 			save();
